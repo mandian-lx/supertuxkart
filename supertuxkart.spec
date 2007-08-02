@@ -1,14 +1,12 @@
-%define rname SuperTuxKart
 %define name supertuxkart
-%define version 0.2
-%define release %mkrel 2
+%define version 0.3
+%define release %mkrel 1
 
 Summary: Kart racing game
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: http://prdownload.berlios.de/supertuxkart/%{rname}-%{version}.tar.bz2
-Source1: %{name}.png
+Source0: http://prdownload.berlios.de/supertuxkart/%{name}-%{version}-src.tar.bz2
 License: GPL
 Group: Games/Arcade
 Url: http://supertuxkart.berlios.de/
@@ -32,31 +30,14 @@ tracks and a reworked userinterface.
 rm -rf %{buildroot}
 %makeinstall bindir=$RPM_BUILD_ROOT%{_gamesbindir}
 
-install -D -m 644 %{SOURCE1} %{buildroot}%{_datadir}/icons/%{name}.png
-
-install -d %{buildroot}%{_datadir}/applications
-cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=SuperTuxKart
-Comment=Kart racing game
-Exec=soundwrapper %_gamesbindir/%{name}
-Icon=%{name}
-Terminal=false
-Type=Application
-Categories=Game;ArcadeGame;X-MandrivaLinux-MoreApplications-Games-Arcade;
-EOF
-
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS CHANGES NEWS README TODO
+%doc AUTHORS ChangeLog NEWS README TODO
 %{_gamesbindir}/%{name}
 %dir %{_gamesdatadir}/%{name}
 %{_gamesdatadir}/%{name}/*
-%{_datadir}/icons/%{name}.png
-%{_datadir}/applications/mandriva-%{name}.desktop
-
-
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/pixmaps/%{name}_*.xpm
