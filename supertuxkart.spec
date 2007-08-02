@@ -32,7 +32,7 @@ tracks and a reworked userinterface.
 
 %install
 rm -rf %{buildroot}
-%makeinstall bindir=$RPM_BUILD_ROOT%{_gamesbindir}
+%makeinstall bindir=%{buildroot}%{_gamesbindir}
 
 %clean
 rm -rf %{buildroot}
