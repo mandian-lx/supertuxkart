@@ -11,8 +11,12 @@ License: GPL
 Group: Games/Arcade
 Url: http://supertuxkart.berlios.de/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires: freealut-devel
+BuildRequires: libmikmod-devel
 BuildRequires: mesagl-devel
 BuildRequires: plib-devel
+BuildRequires: oggvorbis-devel
+BuildRequires: SDL-devel
 
 %description
 SuperTuxKart is an improved version of TuxKart, a kart racing game
