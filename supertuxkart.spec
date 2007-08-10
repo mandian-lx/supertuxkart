@@ -1,6 +1,6 @@
 %define name supertuxkart
 %define version 0.3
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary: Kart racing game
 Name: %{name}
@@ -17,6 +17,7 @@ BuildRequires: mesagl-devel
 BuildRequires: plib-devel
 BuildRequires: oggvorbis-devel
 BuildRequires: SDL-devel
+BuildRequires: desktop-file-utils
 
 %description
 SuperTuxKart is an improved version of TuxKart, a kart racing game
@@ -33,6 +34,11 @@ tracks and a reworked userinterface.
 %install
 rm -rf %{buildroot}
 %makeinstall bindir=%{buildroot}%{_gamesbindir}
+
+desktop-file-install --vendor='' \
+	--dir=%{buildroot}%{_datadir}/applications \
+	--remove-category='3DGraphics' \
+	%{buildroot}%{_datadir}/applications/*.desktop
 
 %clean
 rm -rf %{buildroot}
