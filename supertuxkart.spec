@@ -10,7 +10,6 @@ Source0: http://prdownload.berlios.de/supertuxkart/%{name}-%{version}-src.tar.bz
 License: GPL
 Group: Games/Arcade
 Url: http://supertuxkart.berlios.de/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: freealut-devel
 BuildRequires: libmikmod-devel
 BuildRequires: mesagl-devel
