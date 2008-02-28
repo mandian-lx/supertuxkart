@@ -21,6 +21,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: freealut-devel
 BuildRequires: libmikmod-devel
 BuildRequires: mesagl-devel
+BuildRequires: mesaglut-devel
 BuildRequires: plib-devel
 BuildRequires: oggvorbis-devel
 BuildRequires: SDL-devel
