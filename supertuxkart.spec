@@ -1,6 +1,6 @@
 %define pre rc1a
 %if %pre
-%define release %mkrel 0.%pre.1
+%define release %mkrel 0.%pre.2
 %else
 %define release %mkrel 1
 %endif
@@ -14,6 +14,7 @@ Source0: http://prdownload.berlios.de/supertuxkart/%{name}-%{version}%{pre}-src.
 %else
 Source0: http://prdownload.berlios.de/supertuxkart/%{name}-%{version}-src.tar.bz2
 %endif
+Patch0: supertuxkart-0.4rc1a-fix-desktop.patch
 License: GPLv2+
 Group: Games/Arcade
 Url: http://supertuxkart.berlios.de/
@@ -35,7 +36,7 @@ tracks and a reworked user interface.
 
 %prep
 %setup -q -n %{name}-0.4rc1
-sed -i -e 's,%{name}_64.xpm,%{name},g' data/%{name}.desktop
+%patch0 -p0
 
 %build
 %configure2_5x --bindir=%{_gamesbindir}
@@ -51,11 +52,6 @@ convert -scale 16x16 data/%{name}_32.xpm %{buildroot}%{_iconsdir}/hicolor/16x16/
 convert data/%{name}_32.xpm %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
 convert -scale 48x48 data/%{name}_64.xpm %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 convert data/%{name}_64.xpm %{buildroot}%{_iconsdir}/hicolor/64x64/apps/%{name}.png
-
-desktop-file-install --vendor='' \
-	--dir=%{buildroot}%{_datadir}/applications \
-	--remove-category='3DGraphics' \
-	%{buildroot}%{_datadir}/applications/*.desktop
 
 %clean
 rm -rf %{buildroot}
