@@ -1,23 +1,24 @@
-%define pre rc1a
+%define pre	0
+%define rel	1
 %if %pre
-%define release %mkrel 0.%pre.2
+%define release		%mkrel 0.%pre.%rel
+%define distname	%name-%version%pre-src.tar.bz2
+%define dirname		%name-%version%pre
 %else
-%define release %mkrel 1
+%define release		%mkrel %rel
+%define distname	%name-%version-src.tar.bz2
+%define dirname		%name-%version
 %endif
 
 Summary: Kart racing game
 Name: supertuxkart
 Version: 0.4
 Release: %{release}
-%if %pre
-Source0: http://prdownload.berlios.de/supertuxkart/%{name}-%{version}%{pre}-src.tar.bz2
-%else
-Source0: http://prdownload.berlios.de/supertuxkart/%{name}-%{version}-src.tar.bz2
-%endif
-Patch0: supertuxkart-0.4rc1a-fix-desktop.patch
+Source0: http://prdownload.berlios.de/supertuxkart/%{distname}
+Patch0: supertuxkart-0.4-fix-desktop.patch
 License: GPLv2+
 Group: Games/Arcade
-Url: http://supertuxkart.berlios.de/
+URL: http://supertuxkart.berlios.de/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: freealut-devel
 BuildRequires: libmikmod-devel
@@ -35,8 +36,8 @@ featuring Tux and friends. SuperTuxKart contains new characters, new
 tracks and a reworked user interface.
 
 %prep
-%setup -q -n %{name}-0.4rc1
-%patch0 -p0
+%setup -q -n %{dirname}
+%patch0 -p1
 
 %build
 %configure2_5x --bindir=%{_gamesbindir}
