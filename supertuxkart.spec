@@ -6,16 +6,18 @@
 %define dirname		%name-%version%pre
 %else
 %define release		%mkrel %rel
-%define distname	%name-%version-src.tar.bz2
+%define distname	%name-%version.tar.bz2
 %define dirname		%name-%version
 %endif
 
 Summary: Kart racing game
 Name: supertuxkart
-Version: 0.4
+Version: 0.5
 Release: %{release}
-Source0: http://prdownload.berlios.de/supertuxkart/%{distname}
+Source0: http://downloads.sourceforge.net/supertuxkart/%{distname}
 Patch0: supertuxkart-0.4-fix-desktop.patch
+# (fhimpe) http://sourceforge.net/tracker/index.php?func=detail&aid=1996464&group_id=202302&atid=981038
+Patch1: supertuxkart-0.5-upstream-bug-1996464.patch
 License: GPLv2+
 Group: Games/Arcade
 URL: http://supertuxkart.berlios.de/
@@ -29,6 +31,7 @@ BuildRequires: oggvorbis-devel
 BuildRequires: SDL-devel
 BuildRequires: desktop-file-utils
 BuildRequires: ImageMagick
+BuildRequires: openal-devel
 
 %description
 SuperTuxKart is an improved version of TuxKart, a kart racing game
@@ -38,6 +41,7 @@ tracks and a reworked user interface.
 %prep
 %setup -q -n %{dirname}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure2_5x --bindir=%{_gamesbindir}
