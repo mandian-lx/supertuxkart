@@ -30,7 +30,7 @@ BuildRequires: plib-devel
 BuildRequires: oggvorbis-devel
 BuildRequires: SDL-devel
 BuildRequires: desktop-file-utils
-BuildRequires: ImageMagick
+BuildRequires: imagemagick
 BuildRequires: openal-devel
 
 %description
