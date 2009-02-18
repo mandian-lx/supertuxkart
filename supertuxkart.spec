@@ -12,11 +12,11 @@
 
 Summary: Kart racing game
 Name: supertuxkart
-Version: 0.6
+Version: 0.6.1
 Release: %{release}
 Source0: http://downloads.sourceforge.net/supertuxkart/%{distname}
 Patch0: supertuxkart-0.6-fix-desktop.patch
-Patch1: supertuxkart-0.6-fix-str-fmt.patch
+Patch1: supertuxkart-0.6.1-fix-str-fmt.patch
 License: GPLv2+
 Group: Games/Arcade
 URL: http://supertuxkart.berlios.de/
@@ -40,7 +40,7 @@ tracks and a reworked user interface.
 %prep
 %setup -q -n %{dirname}
 %patch0 -p1
-%patch1 -p0
+%patch1 -p1
 
 %build
 %configure2_5x --bindir=%{_gamesbindir}
