@@ -1,5 +1,5 @@
 %define pre	0
-%define rel	1
+%define rel	2
 %if %pre
 %define release		%mkrel 0.%pre.%rel
 %define distname	%name-%version%pre-src.tar.bz2
@@ -43,6 +43,7 @@ tracks and a reworked user interface.
 %build
 %configure2_5x --bindir=%{_gamesbindir}
 %make
+chmod -x AUTHORS ChangeLog NEWS README
 
 %install
 rm -rf %{buildroot}
