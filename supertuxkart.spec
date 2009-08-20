@@ -6,13 +6,13 @@
 %define dirname		%name-%version%pre
 %else
 %define release		%mkrel %rel
-%define distname	%name-%version.tar.bz2
+%define distname	%name-%version-src.tar.bz2
 %define dirname		%name-%version
 %endif
 
 Summary: Kart racing game
 Name: supertuxkart
-Version: 0.6.1a
+Version: 0.6.2
 Release: %{release}
 Source0: http://downloads.sourceforge.net/supertuxkart/%{distname}
 Patch0: supertuxkart-0.6-fix-desktop.patch
