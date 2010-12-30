@@ -2,7 +2,7 @@
 %define version	0.7
 
 %define pre	0
-%define rel	1
+%define rel	2
 
 %if %pre
 %define release		%mkrel 0.%pre.%rel
@@ -34,7 +34,7 @@ BuildRequires:	SDL-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	openal-devel
-BuildRequires:	irrlicht-devel
+BuildRequires:	irrlicht-devel >= 1.7
 BuildRequires:	fribidi-devel
 
 %description
