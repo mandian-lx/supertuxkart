@@ -1,5 +1,9 @@
+%define name	supertuxkart
+%define version	0.7
+
 %define pre	0
-%define rel	2
+%define rel	1
+
 %if %pre
 %define release		%mkrel 0.%pre.%rel
 %define distname	%name-%version%pre-src.tar.bz2
@@ -10,26 +14,28 @@
 %define dirname		%name-%version
 %endif
 
-Summary: Kart racing game
-Name: supertuxkart
-Version: 0.6.2
-Release: %{release}
-Source0: http://downloads.sourceforge.net/supertuxkart/%{distname}
-Patch0: supertuxkart-0.6-fix-desktop.patch
-License: GPLv2+
-Group: Games/Arcade
-URL: http://supertuxkart.berlios.de/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: freealut-devel
-BuildRequires: libmikmod-devel
-BuildRequires: mesagl-devel
-BuildRequires: mesaglut-devel
-BuildRequires: plib-devel
-BuildRequires: oggvorbis-devel
-BuildRequires: SDL-devel
-BuildRequires: desktop-file-utils
-BuildRequires: imagemagick
-BuildRequires: openal-devel
+Summary:	Kart racing game
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+Source0:	http://downloads.sourceforge.net/supertuxkart/%{distname}
+Patch0:		supertuxkart-0.6-fix-desktop.patch
+License:	GPLv2+
+Group:		Games/Arcade
+URL:		http://supertuxkart.sourceforge.net/
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	freealut-devel
+BuildRequires:	libmikmod-devel
+BuildRequires:	mesagl-devel
+BuildRequires:	mesaglut-devel
+BuildRequires:	plib-devel
+BuildRequires:	oggvorbis-devel
+BuildRequires:	SDL-devel
+BuildRequires:	desktop-file-utils
+BuildRequires:	imagemagick
+BuildRequires:	openal-devel
+BuildRequires:	irrlicht-devel
+BuildRequires:	fribidi-devel
 
 %description
 SuperTuxKart is an improved version of TuxKart, a kart racing game
@@ -40,10 +46,14 @@ tracks and a reworked user interface.
 %setup -q -n %{dirname}
 %patch0 -p1
 
-%build
-%configure2_5x --bindir=%{_gamesbindir}
-%make
+#fix rights
 chmod -x AUTHORS ChangeLog NEWS README
+
+%build
+%configure2_5x \
+	--bindir=%{_gamesbindir} \
+	--disable-rpath
+%make
 
 %install
 rm -rf %{buildroot}
@@ -63,7 +73,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog NEWS README TODO
 %{_gamesbindir}/%{name}
-%dir %{_gamesdatadir}/%{name}
-%{_gamesdatadir}/%{name}/*
+%{_gamesdatadir}/%{name}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
