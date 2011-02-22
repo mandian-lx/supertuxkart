@@ -2,16 +2,16 @@
 %define version	0.7
 
 %define pre	0
-%define rel	2
+%define rel	3
 
 %if %pre
 %define release		%mkrel 0.%pre.%rel
 %define distname	%name-%version%pre-src.tar.bz2
-%define dirname		%name-%version%pre
+%define srcdirname	%name-%version%pre
 %else
 %define release		%mkrel %rel
 %define distname	%name-%version-src.tar.bz2
-%define dirname		%name-%version
+%define srcdirname	%name-%version
 %endif
 
 Summary:	Kart racing game
@@ -26,8 +26,7 @@ URL:		http://supertuxkart.sourceforge.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	freealut-devel
 BuildRequires:	libmikmod-devel
-BuildRequires:	mesagl-devel
-BuildRequires:	mesaglut-devel
+BuildRequires:	libgl-devel
 BuildRequires:	plib-devel
 BuildRequires:	oggvorbis-devel
 BuildRequires:	SDL-devel
@@ -43,7 +42,7 @@ featuring Tux and friends. SuperTuxKart contains new characters, new
 tracks and a reworked user interface.
 
 %prep
-%setup -q -n %{dirname}
+%setup -q -n %{srcdirname}
 %patch0 -p1
 
 #fix rights
