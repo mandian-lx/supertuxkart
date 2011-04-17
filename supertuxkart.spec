@@ -46,7 +46,7 @@ tracks and a reworked user interface.
 %patch0 -p1
 
 #fix rights
-chmod -x AUTHORS ChangeLog NEWS README
+chmod -x AUTHORS ChangeLog README
 
 %build
 %configure2_5x \
@@ -70,7 +70,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS ChangeLog README TODO
 %{_gamesbindir}/%{name}
 %{_gamesdatadir}/%{name}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
