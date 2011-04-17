@@ -1,8 +1,8 @@
 %define name	supertuxkart
-%define version	0.7
+%define version	0.7.1
 
 %define pre	0
-%define rel	3
+%define rel	1
 
 %if %pre
 %define release		%mkrel 0.%pre.%rel
