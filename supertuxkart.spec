@@ -43,7 +43,7 @@ tracks and a reworked user interface.
 
 %prep
 %setup -q -n %{srcdirname}
-%patch0 -p1
+# %patch0 -p1
 
 #fix rights
 chmod -x AUTHORS ChangeLog README
