@@ -1,0 +1,22 @@
+Index: supertuxkart-0.6.1a/data/supertuxkart_desktop.template
+===================================================================
+--- supertuxkart-0.6.1a/data/supertuxkart_desktop.template
++++ supertuxkart-0.6.1a/data/supertuxkart_desktop.template	2009-05-13 11:35:31.000000000 +0200
+@@ -1,9 +1,7 @@
+ 
+ [Desktop Entry]
+-Encoding=UTF-8
+ Name=Supertuxkart
+-Version=0.5
+-Icon=PREFIX/share/pixmaps/supertuxkart_64.xpm
++Icon=supertuxkart
+ Comment=A kart racing game
+ Comment[fr_FR]=Un jeu de karting
+ Comment[ro_RO]=Un joc de curse cu carturi
+@@ -13,5 +11,4 @@
+ StartupNotify=false
+ Type=Application
+ TryExec=PREFIX/games/supertuxkart
+-Categories=Game;ArcadeGame
+-GenericName=
++Categories=Game;ArcadeGame;
