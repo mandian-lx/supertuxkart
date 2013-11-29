@@ -10,6 +10,7 @@ Patch0:		supertuxkart-0.8.1-desktop.patch
 Patch1:		supertuxkart-0.8.1-static.patch
 BuildRequires:	cmake
 BuildRequires:	imagemagick
+BuildRequires:	pkgconfig(bluez)
 BuildRequires:	pkgconfig(freealut)
 BuildRequires:	pkgconfig(fribidi)
 BuildRequires:	pkgconfig(gl)
