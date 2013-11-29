@@ -8,6 +8,7 @@ URL:		http://supertuxkart.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/supertuxkart/%{name}-%{version}-src.tar.bz2
 Patch0:		supertuxkart-0.8.1-desktop.patch
 Patch1:		supertuxkart-0.8.1-static.patch
+BuildRequires:	cmake
 BuildRequires:	imagemagick
 BuildRequires:	pkgconfig(freealut)
 BuildRequires:	pkgconfig(fribidi)
