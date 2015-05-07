@@ -1,23 +1,27 @@
 Summary:	Kart racing game
 Name:		supertuxkart
-Version:	0.8.1
-Release:	2
+Version:	0.9
+Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
-URL:		http://supertuxkart.sourceforge.net/
-Source0:	http://downloads.sourceforge.net/supertuxkart/%{name}-%{version}-src.tar.bz2
-Patch0:		supertuxkart-0.8.1-desktop.patch
-Patch1:		supertuxkart-0.8.1-static.patch
+Url:		http://supertuxkart.sourceforge.net/
+Source0:	http://downloads.sourceforge.net/supertuxkart/%{name}-%{version}-src.tar.xz
+Patch0:		supertuxkart-0.9-static.patch
 BuildRequires:	cmake
 BuildRequires:	imagemagick
+BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(bluez)
 BuildRequires:	pkgconfig(freealut)
 BuildRequires:	pkgconfig(fribidi)
 BuildRequires:	pkgconfig(gl)
+BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libenet)
+BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(vorbis)
+BuildRequires:	pkgconfig(xrandr)
+BuildRequires:	pkgconfig(zlib)
 
 %description
 SuperTuxKart is an improved version of TuxKart, a kart racing game
@@ -25,19 +29,19 @@ featuring Tux and friends. SuperTuxKart contains new characters, new
 tracks and a reworked user interface.
 
 %files
-%doc AUTHORS ChangeLog README TODO
+%doc AUTHORS CHANGELOG.md README.md TODO.md
 %{_gamesbindir}/%{name}
 %{_gamesdatadir}/%{name}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
+%{_datadir}/appdata/supertuxkart.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}_*.png
 
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n SuperTuxKart-%{version}
+%setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %cmake \
