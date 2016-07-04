@@ -13,6 +13,7 @@ BuildRequires:	imagemagick
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(bluez)
 BuildRequires:	pkgconfig(freealut)
+BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(fribidi)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
