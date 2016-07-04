@@ -1,6 +1,6 @@
 Summary:	Kart racing game
 Name:		supertuxkart
-Version:	0.9
+Version:	0.9.2
 Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
