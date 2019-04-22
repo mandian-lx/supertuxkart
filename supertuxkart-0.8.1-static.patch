@@ -1,0 +1,28 @@
+diff -urN SuperTuxKart-0.8.1/lib/irrlicht/CMakeLists.txt SuperTuxKart-0.8.1-patched/lib/irrlicht/CMakeLists.txt
+--- SuperTuxKart-0.8.1/lib/irrlicht/CMakeLists.txt	2013-11-15 09:29:12.000000000 +1100
++++ SuperTuxKart-0.8.1-patched/lib/irrlicht/CMakeLists.txt	2013-11-29 15:59:01.126226716 +1100
+@@ -774,5 +774,5 @@
+     set_source_files_properties(source/Irrlicht/MacOSX/OSXClipboard.mm PROPERTIES LANGUAGE C)
+ endif()
+ 
+-add_library(stkirrlicht ${IRRLICHT_SOURCES})
++add_library(stkirrlicht STATIC ${IRRLICHT_SOURCES})
+ 
+diff -urN SuperTuxKart-0.8.1/lib/wiiuse/CMakeLists.txt SuperTuxKart-0.8.1-patched/lib/wiiuse/CMakeLists.txt
+--- SuperTuxKart-0.8.1/lib/wiiuse/CMakeLists.txt	2013-11-15 09:18:53.000000000 +1100
++++ SuperTuxKart-0.8.1-patched/lib/wiiuse/CMakeLists.txt	2013-11-29 16:03:27.724449921 +1100
+@@ -28,12 +28,8 @@
+     )
+ endif()
+ 
+-if(MSVC)
+-    add_definitions("/DWIIUSE_STATIC")
+-    add_library(wiiuse STATIC ${WIIUSE_SOURCES})
+-else()
+-    add_library(wiiuse ${WIIUSE_SOURCES})
+-endif()
++add_definitions("/DWIIUSE_STATIC")
++add_library(wiiuse STATIC ${WIIUSE_SOURCES})
+ 
+ if(MSVC)
+     if(MSVC90)

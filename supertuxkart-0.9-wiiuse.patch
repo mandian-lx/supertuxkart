@@ -1,0 +1,12 @@
+diff -Nru supertuxkart-0.9.orig/src/input/wiimote_manager.cpp supertuxkart-0.9/src/input/wiimote_manager.cpp
+--- supertuxkart-0.9.orig/src/input/wiimote_manager.cpp
++++ supertuxkart-0.9/src/input/wiimote_manager.cpp
+@@ -71,7 +71,7 @@
+     memset(previous_wiimotes,0,sizeof(struct wiimote_t*) * MAX_WIIMOTES);
+     for (unsigned int i = 0; i < m_wiimotes.size(); i++)
+     {
+-      if (WIIMOTE_IS_CONNECTED(m_all_wiimote_handles[i]))
++      if ((m_all_wiimote_handles[i]->state & (0x0008)) == (0x0008))
+       {
+         previous_wiimotes[i]=m_all_wiimote_handles[i];
+         m_all_wiimote_handles[i] = NULL;

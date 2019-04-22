@@ -1,0 +1,166 @@
+--- supertuxkart-0.9.orig/CMakeLists.txt
++++ supertuxkart-0.9/CMakeLists.txt
+@@ -28,7 +28,7 @@
+     option(WIIUSE_BUILD "Build wiiuse lib (only for developers)" OFF)
+     mark_as_advanced(WIIUSE_BUILD)
+ else()
+-    set(WIIUSE_BUILD ON)
++    option(WIIUSE_BUILD "Build wiiuse lib" OFF)
+ endif()
+ 
+ if(MINGW OR CYGWIN)
+@@ -64,13 +64,20 @@
+ include_directories("${PROJECT_SOURCE_DIR}/lib/bullet/src")
+ 
+ # Build the ENet UDP network library
+-add_subdirectory("${PROJECT_SOURCE_DIR}/lib/enet")
+-include_directories("${PROJECT_SOURCE_DIR}/lib/enet/include")
++#add_subdirectory("${PROJECT_SOURCE_DIR}/lib/enet")
++#include_directories("${PROJECT_SOURCE_DIR}/lib/enet/include")
++# Looking for ENet UDP network library
++find_package(ENet REQUIRED)
++include_directories(${ENET_INCLUDE_DIR})
+ 
+ # Build glew library
+ add_definitions(-DGLEW_NO_GLU)
+-add_subdirectory("${PROJECT_SOURCE_DIR}/lib/glew")
+-include_directories("${PROJECT_SOURCE_DIR}/lib/glew/include")
++#add_subdirectory("${PROJECT_SOURCE_DIR}/lib/glew")
++#include_directories("${PROJECT_SOURCE_DIR}/lib/glew/include")
++# GLEW
++find_package(GLEW REQUIRED)
++include_directories(${GLEW_INCLUDE_DIR})
++
+ 
+ if((WIN32 AND NOT MINGW) OR APPLE)
+     if (NOT APPLE)
+@@ -111,7 +118,9 @@
+     if(WIIUSE_BUILD)
+         add_subdirectory("${PROJECT_SOURCE_DIR}/lib/wiiuse")
+     endif()
+-    include_directories("${PROJECT_SOURCE_DIR}/lib/wiiuse")
++#    include_directories("${PROJECT_SOURCE_DIR}/lib/wiiuse")
++     find_package(Wiiuse REQUIRED)
++     include_directories(${WIIUSE_INCLUDE_DIR})
+ endif()
+ 
+ # Set include paths
+@@ -342,15 +351,23 @@
+     bulletdynamics
+     bulletcollision
+     bulletmath
+-    enet
+-    glew
++#    enet
++#    glew
+     stkirrlicht
+     ${Angelscript_LIBRARIES}
+     ${CURL_LIBRARIES}
++    ${ENET_LIBRARIES}
++    ${GLEW_LIBRARIES}
++    ${WIIUSE_LIBRARIES}
+     ${OGGVORBIS_LIBRARIES}
+     ${OPENAL_LIBRARY}
+     ${OPENGL_LIBRARIES}
+     ${FREETYPE_LIBRARIES}
++    X11
++    z
++    png
++    jpeg
++    bz2
+     )
+ 
+ if(UNIX AND NOT APPLE)
+@@ -399,7 +416,7 @@
+             target_link_libraries(supertuxkart ${PROJECT_SOURCE_DIR}/dependencies/lib/wiiuse.lib)
+         endif()
+     else()
+-        target_link_libraries(supertuxkart wiiuse bluetooth)
++        target_link_libraries(supertuxkart ${WIIUSE_LIBRARIES})
+     endif()
+     add_definitions(-DENABLE_WIIUSE)
+ 
+diff -Nru supertuxkart-0.9.orig/cmake/FindENet.cmake supertuxkart-0.9/cmake/FindENet.cmake
+--- supertuxkart-0.9.orig/cmake/FindENet.cmake
++++ supertuxkart-0.9/cmake/FindENet.cmake
+@@ -0,0 +1,24 @@
++# - Find ENet
++# Find the ENet includes and libraries
++#
++# Following variables are provided:
++# ENET_FOUND
++#     True if ENet has been found
++# ENET_INCLUDE_DIR
++#     The include directories of ENet
++# ENET_LIBRARIES
++#     ENet library list
++
++
++find_path(ENET_INCLUDE_DIR NAMES enet/enet.h)
++find_library(ENET_LIBRARY NAMES enet)
++
++include(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(ENet DEFAULT_MSG ENET_LIBRARY ENET_INCLUDE_DIR )
++
++# Publish variables
++set(ENET_LIBRARIES ${ENET_LIBRARY})
++set(ENET_INCLUDE_DIRS ${ENET_INCLUDE_DIR})
++
++mark_as_advanced(ENET_INCLUDE_DIR ENET_LIBRARY)
++
+diff -Nru supertuxkart-0.9.orig/cmake/FindGLEW.cmake supertuxkart-0.9/cmake/FindGLEW.cmake
+--- supertuxkart-0.9.orig/cmake/FindGLEW.cmake
++++ supertuxkart-0.9/cmake/FindGLEW.cmake
+@@ -0,0 +1,25 @@
++# - Find GLEW
++# Find the GLEW includes and libraries
++#
++# Following variables are provided:
++# GLEW_FOUND
++#     True if GLEW has been found
++# GLEW_INCLUDE_DIR
++#     The include directories of GLEW
++# GLEW_LIBRARIES
++#     GLEW library list
++
++
++find_path(GLEW_INCLUDE_DIR NAMES glew.h PATH_SUFFIXES GL)
++find_library(GLEW_LIBRARY NAMES GLEW)
++
++include(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(GLEW DEFAULT_MSG GLEW_LIBRARY GLEW_INCLUDE_DIR )
++
++# Publish variables
++if(GLEW_FOUND)
++  set(GLEW_LIBRARIES ${GLEW_LIBRARY})
++  set(GLEW_INCLUDE_DIRS ${GLEW_INCLUDE_DIR})
++endif()
++
++mark_as_advanced(GLEW_INCLUDE_DIR GLEW_LIBRARY)
+diff -Nru supertuxkart-0.9.orig/cmake/FindWiiuse.cmake supertuxkart-0.9/cmake/FindWiiuse.cmake
+--- supertuxkart-0.9.orig/cmake/FindWiiuse.cmake
++++ supertuxkart-0.9/cmake/FindWiiuse.cmake
+@@ -0,0 +1,23 @@
++# - Find Wiiuse
++# Find the wiiuse includes and libraries
++#
++# Following variables are provided:
++# WIIUSE_FOUND
++#     True if wiiuse has been found
++# WIIUSE_INCLUDE_DIR
++#     The include directories of wiiuse
++# WIIUSE_LIBRARIES
++#     wiiuse library list
++
++
++find_path(WIIUSE_INCLUDE_DIR NAMES wiiuse.h)
++find_library(WIIUSE_LIBRARY NAMES wiiuse)
++
++include(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(Wiiuse DEFAULT_MSG WIIUSE_LIBRARY WIIUSE_INCLUDE_DIR )
++
++# Publish variables
++set(WIIUSE_LIBRARIES ${WIIUSE_LIBRARY})
++set(WIIUSE_INCLUDE_DIRS ${WIIUSE_INCLUDE_DIR})
++
++mark_as_advanced(WIIUSE_INCLUDE_DIR WIIUSE_LIBRARY)
